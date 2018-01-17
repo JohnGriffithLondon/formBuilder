@@ -110,7 +110,8 @@ jQuery(function ($) {
 
   var typeUserDisabledAttrs = {
     autocomplete: ['access'],
-    file: ['multiple', 'subtype']
+    file: ['multiple', 'subtype'],
+    'checkbox-group':['toggle'],
   };
 
   var typeUserAttrs = {
@@ -119,7 +120,7 @@ jQuery(function ($) {
 
   // test disabledAttrs
   var disabledAttrs = ['access',
-    'placeholder', 'max', 'maxlength', 'min', 'value', 'description'];//'className',
+    'placeholder', 'max', 'maxlength', 'min', 'value', 'description','other'];//'className',
 
   var fbOptions = {
     subtypes: {
