@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="LPA_START" name="LPA计划编制流程" isExecutable="true" activiti:candidateStarterGroups="CEO">
+    <startEvent id="S1" name="启动">
+      <extensionElements>
+        <activiti:formProperty id="planid_计划编号_1_string_t6_$$A" name="计划编号" type="string" variable="planid_t00" writable="true" required="true"/>
+        <activiti:formProperty id="comments_备注说明_2_string_t1_$$A" name="备注说明" type="string" variable="comments_t00" writable="true" required="true"/>
+
+		<activiti:formProperty id="tbhdprocess_item" name="流程明细" type="string" variable="tbhdprocess_item" required="true"></activiti:formProperty>
+        <activiti:formProperty id="tbhdprocess_子流程编号_processid_1_string_bpid_$$VA" name="子流程编号" type="string" variable="tbhdprocess_processid_t00" writable="true" required="true"/>
+        <activiti:formProperty id="tbhdprocess_责任人_responsible_2_string_psbi_$$VA" name="责任人" type="string" variable="tbhdprocess_responsible_t00" writable="true" required="true"/>
+
+
+      </extensionElements>
+    </startEvent>
+    <serviceTask id="M1" name="SubProcess触发" activiti:async="true" activiti:exclusive="false" activiti:type="mail">
+		<extensionElements>
+        <activiti:field name="to">
+          <activiti:string><![CDATA[esbredmineproject@bpms.dev]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string><![CDATA[bpmsmail@bpms.dev]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string><![CDATA[LPA_START]]></activiti:string>
+        </activiti:field>
+        <activiti:field name="text">
+          <activiti:expression>{
+		  "planid":"${planid_t00}",
+		  "comments":"${comments_t00}",
+		  "processlist":${tbhdprocess_item_std}}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="charset">
+          <activiti:string><![CDATA[UTF-8]]></activiti:string>
+        </activiti:field>
+      </extensionElements>
+	</serviceTask>
+    <sequenceFlow id="sid-E0D2FBE5-6136-49B8-AD62-B2C7CA8CACC8" sourceRef="S1" targetRef="M1"/>
+    <endEvent id="E1" name="结束"/>
+    <sequenceFlow id="sid-7AB713A3-F870-43D2-98C9-BB46566F134B" sourceRef="M1" targetRef="E1"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_LPA_START">
+    <bpmndi:BPMNPlane bpmnElement="LPA_START" id="BPMNPlane_LPA_START">
+      <bpmndi:BPMNShape bpmnElement="S1" id="BPMNShape_S1">
+        <omgdc:Bounds height="30.0" width="30.0" x="135.0" y="90.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="M1" id="BPMNShape_M1">
+        <omgdc:Bounds height="80.0" width="100.0" x="255.0" y="65.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="E1" id="BPMNShape_E1">
+        <omgdc:Bounds height="28.0" width="28.0" x="450.0" y="91.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-7AB713A3-F870-43D2-98C9-BB46566F134B" id="BPMNEdge_sid-7AB713A3-F870-43D2-98C9-BB46566F134B">
+        <omgdi:waypoint x="355.0" y="105.0"/>
+        <omgdi:waypoint x="450.0" y="105.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-E0D2FBE5-6136-49B8-AD62-B2C7CA8CACC8" id="BPMNEdge_sid-E0D2FBE5-6136-49B8-AD62-B2C7CA8CACC8">
+        <omgdi:waypoint x="165.0" y="105.0"/>
+        <omgdi:waypoint x="255.0" y="105.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
