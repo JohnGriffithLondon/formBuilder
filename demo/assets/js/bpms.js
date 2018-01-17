@@ -1,27 +1,35 @@
 jQuery(function ($) {
   var fields = [
+    // {
+    //   type: 'autocomplete',
+    //   label: 'Custom Autocomplete',
+    //   required: true,
+    //   values: [
+    //     { label: 'SQL' },
+    //     { label: 'C#' },
+    //     { label: 'JavaScript' },
+    //     { label: 'Java' },
+    //     { label: 'Python' },
+    //     { label: 'C++' },
+    //     { label: 'PHP' },
+    //     { label: 'Swift' },
+    //     { label: 'Ruby' }
+    //   ]
+    // },
+    // {
+    //   label: 'Star Rating',
+    //   attrs: {
+    //     type: 'starRating'
+    //   },
+    //   icon: '🌟'
+    // },
+
+
+
     {
-      type: 'autocomplete',
-      label: 'Custom Autocomplete',
-      required: true,
-      values: [
-        { label: 'SQL' },
-        { label: 'C#' },
-        { label: 'JavaScript' },
-        { label: 'Java' },
-        { label: 'Python' },
-        { label: 'C++' },
-        { label: 'PHP' },
-        { label: 'Swift' },
-        { label: 'Ruby' }
-      ]
-    },
-    {
-      label: 'Star Rating',
-      attrs: {
-        type: 'starRating'
-      },
-      icon: '🌟'
+      type: 'checkbox',
+      label: 'Flip Switch',
+      toggle: true
     }
   ];
 
@@ -101,7 +109,8 @@ jQuery(function ($) {
   }];
 
   var typeUserDisabledAttrs = {
-    autocomplete: ['access']
+    autocomplete: ['access'],
+    file: ['multiple', 'subtype']
   };
 
   var typeUserAttrs = {
@@ -110,7 +119,7 @@ jQuery(function ($) {
 
   // test disabledAttrs
   var disabledAttrs = ['access',
-    'placeholder', 'max', 'maxlength', 'min','value'];//'className',
+    'placeholder', 'max', 'maxlength', 'min', 'value', 'description'];//'className',
 
   var fbOptions = {
     subtypes: {
@@ -128,20 +137,36 @@ jQuery(function ($) {
       enable: true
     },
     sortableControls: true,
-    fields: [],//fields,
+    fields: fields,
     templates: [],//templates,
     inputSets: [],//inputSets,
-    typeUserDisabledAttrs: {},//typeUserDisabledAttrs,
+    typeUserDisabledAttrs: typeUserDisabledAttrs,
     typeUserAttrs: typeUserAttrs,
     disableInjectedStyle: false,
     actionButtons: actionButtons,
-    disableFields: ['button','hidden','paragraph'], //['autocomplete'],
+    disableFields: ['button', 'hidden', 'paragraph'], //['autocomplete'],
     replaceFields: [], //replaceFields,
     disabledFieldButtons: {
       text: ['copy']
     },
     //controlPosition: 'left',
-    disabledAttrs: disabledAttrs
+    disabledAttrs: disabledAttrs,
+    controlOrder: [
+      'text',
+      'textarea',
+      'autocomplete',
+      'button',
+      'checkbox',
+      'checkbox-group',
+      'date',
+      'file',
+      'header',
+      'hidden',
+      'paragraph',
+      'number',
+      'radio-group',
+      'select'
+    ],
   };
   var formData = window.sessionStorage.getItem('formData');
   var editing = true;

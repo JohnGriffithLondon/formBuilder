@@ -15,7 +15,7 @@ import controlCustom from './control/custom'
 
 let instanceTime = new Date().getTime()
 
-const FormBuilder = function(opts, element) {
+const FormBuilder = function (opts, element) {
   const formBuilder = this
   const i18n = mi18n.current
   const formID = 'frmb-' + instanceTime++
@@ -155,7 +155,7 @@ const FormBuilder = function(opts, element) {
     revert: 150,
     beforeStop: (evt, ui) => h.beforeStop.call(h, evt, ui),
     distance: 3,
-    update: function(event, ui) {
+    update: function (event, ui) {
       if (h.doCancel) {
         return false
       }
@@ -280,7 +280,7 @@ const FormBuilder = function(opts, element) {
   }
 
   // builds the standard formbuilder datastructure for a feild definition
-  let prepFieldVars = function($field, isNew = false) {
+  let prepFieldVars = function ($field, isNew = false) {
     let field = {}
     if ($field instanceof jQuery) {
       // get the default type etc & label for this field
@@ -340,7 +340,7 @@ const FormBuilder = function(opts, element) {
   }
 
   // Parse saved XML template data
-  let loadFields = function(formData) {
+  let loadFields = function (formData) {
     formData = h.getData(formData)
     if (formData && formData.length) {
       for (let i = 0; i < formData.length; i++) {
@@ -369,7 +369,7 @@ const FormBuilder = function(opts, element) {
    * @param  {Object} fieldData
    * @return {String} field options markup
    */
-  let fieldOptions = function(fieldData) {
+  let fieldOptions = function (fieldData) {
     let { type, values, name } = fieldData
     let optionActions = [m('a', i18n.addOption, { className: 'add add-opt' })]
     let fieldOptions = [m('label', i18n.selectOptions, { className: 'false-label' })]
@@ -392,7 +392,7 @@ const FormBuilder = function(opts, element) {
       if (utils.inArray(type, ['checkbox-group', 'checkbox'])) {
         defaultOptCount = [1]
       }
-      values = defaultOptCount.map(function(index) {
+      values = defaultOptCount.map(function (index) {
         let label = `${i18n.option} ${index}`
         return optionDataTemplate(label)
       })
@@ -687,7 +687,7 @@ const FormBuilder = function(opts, element) {
       .filter(prop => {
         return !utils.inArray(prop, ['value', 'options', 'label'])
       })
-      .forEach(function(attr) {
+      .forEach(function (attr) {
         selectAttrs[attr] = fieldData[attr]
       })
 
@@ -886,6 +886,9 @@ const FormBuilder = function(opts, element) {
       if (attribute === 'value') {
         visibility = values.subtype && values.subtype === 'quill' && 'none'
       }
+      else if (attribute === 'className') {
+        visibility = 'none'
+      }
 
       attributefield = m('div', [attributeLabel, inputWrap], {
         className: `form-group ${attribute}-wrap`,
@@ -915,7 +918,7 @@ const FormBuilder = function(opts, element) {
   }
 
   // Append the new field to the editor
-  let appendNewField = function(values, isNew = true) {
+  let appendNewField = function (values, isNew = true) {
     let type = values.type || 'text'
     let label = values.label || i18n[type] || i18n.label
     let disabledFieldButtons = opts.disabledFieldButtons[type] || values.disabledFieldButtons
@@ -1009,7 +1012,7 @@ const FormBuilder = function(opts, element) {
   }
 
   // Select field html, since there may be multiple
-  let selectFieldOptions = function(name, optionData, multipleSelect) {
+  let selectFieldOptions = function (name, optionData, multipleSelect) {
     let optionInputType = {
       selected: multipleSelect ? 'checkbox' : 'radio',
     }
@@ -1119,7 +1122,7 @@ const FormBuilder = function(opts, element) {
   })
 
   // toggle fields
-  $stage.on('click touchstart', '.toggle-form, .close-field', function(e) {
+  $stage.on('click touchstart', '.toggle-form, .close-field', function (e) {
     e.stopPropagation()
     e.preventDefault()
     if (e.handled !== true) {
@@ -1143,8 +1146,8 @@ const FormBuilder = function(opts, element) {
         e.target.tagName == 'li'
           ? $(e.target).attr('id')
           : $(e.target)
-              .closest('li.form-field')
-              .attr('id')
+            .closest('li.form-field')
+            .attr('id')
       h.toggleEdit(targetID)
       e.handled = true
     }
@@ -1197,12 +1200,12 @@ const FormBuilder = function(opts, element) {
   })
 
   // remove error styling when users tries to correct mistake
-  $stage.on('keyup', 'input.error', function(e) {
+  $stage.on('keyup', 'input.error', function (e) {
     $(e.target).removeClass('error')
   })
 
   // update preview for description
-  $stage.on('keyup', 'input[name="description"]', function(e) {
+  $stage.on('keyup', 'input[name="description"]', function (e) {
     let $field = $(e.target).parents('.form-field:eq(0)')
     let closestToolTip = $('.tooltip-element', $field)
     let ttVal = $(e.target).val()
@@ -1233,7 +1236,7 @@ const FormBuilder = function(opts, element) {
   })
 
   // format name attribute
-  $stage.on('blur', 'input.fld-name', function(e) {
+  $stage.on('blur', 'input.fld-name', function (e) {
     e.target.value = utils.safename(e.target.value)
     if (e.target.value === '') {
       $(e.target)
@@ -1249,7 +1252,7 @@ const FormBuilder = function(opts, element) {
   })
 
   // Copy field
-  $stage.on('click touchstart', '.icon-copy', function(e) {
+  $stage.on('click touchstart', '.icon-copy', function (e) {
     e.preventDefault()
     let currentItem = $(e.target)
       .parent()
@@ -1278,7 +1281,7 @@ const FormBuilder = function(opts, element) {
 
     document.addEventListener(
       'modalClosed',
-      function() {
+      function () {
         $field.removeClass('deleting')
       },
       false
@@ -1316,12 +1319,12 @@ const FormBuilder = function(opts, element) {
   })
 
   // Attach a callback to toggle roles visibility
-  $stage.on('click', 'input.fld-access', function(e) {
+  $stage.on('click', 'input.fld-access', function (e) {
     let roles = $(e.target)
       .closest('.form-field')
       .find('.available-roles')
     let enableRolesCB = $(e.target)
-    roles.slideToggle(250, function() {
+    roles.slideToggle(250, function () {
       if (!enableRolesCB.is(':checked')) {
         $('input[type=checkbox]', roles).removeAttr('checked')
       }
@@ -1329,7 +1332,7 @@ const FormBuilder = function(opts, element) {
   })
 
   // Attach a callback to add new options
-  $stage.on('click', '.add-opt', function(e) {
+  $stage.on('click', '.add-opt', function (e) {
     e.preventDefault()
     let $optionWrap = $(e.target).closest('.field-options')
     let $multiple = $('[name="multiple"]', $optionWrap)
@@ -1396,45 +1399,45 @@ const FormBuilder = function(opts, element) {
 
   return formBuilder
 }
-;(function($) {
-  $.fn.formBuilder = function(options) {
-    if (!options) {
-      options = {}
-    }
-    let elems = this
-    let { i18n, ...opts } = $.extend({}, defaultOptions, options, true)
-    config.opts = opts
-    let i18nOpts = $.extend({}, defaultI18n, i18n, true)
-    let instance = {
-      actions: {
-        getData: null,
-        setData: null,
-        save: null,
-        showData: null,
-        setLang: null,
-        addField: null,
-        removeField: null,
-        clearFields: null,
-      },
-      get formData() {
-        return instance.actions.getData('json')
-      },
-      promise: new Promise(function(resolve, reject) {
-        mi18n
-          .init(i18nOpts)
-          .then(() => {
-            elems.each(i => {
-              let formBuilder = new FormBuilder(opts, elems[i])
-              $(elems[i]).data('formBuilder', formBuilder)
-              instance.actions = formBuilder.actions
+  ; (function ($) {
+    $.fn.formBuilder = function (options) {
+      if (!options) {
+        options = {}
+      }
+      let elems = this
+      let { i18n, ...opts } = $.extend({}, defaultOptions, options, true)
+      config.opts = opts
+      let i18nOpts = $.extend({}, defaultI18n, i18n, true)
+      let instance = {
+        actions: {
+          getData: null,
+          setData: null,
+          save: null,
+          showData: null,
+          setLang: null,
+          addField: null,
+          removeField: null,
+          clearFields: null,
+        },
+        get formData() {
+          return instance.actions.getData('json')
+        },
+        promise: new Promise(function (resolve, reject) {
+          mi18n
+            .init(i18nOpts)
+            .then(() => {
+              elems.each(i => {
+                let formBuilder = new FormBuilder(opts, elems[i])
+                $(elems[i]).data('formBuilder', formBuilder)
+                instance.actions = formBuilder.actions
+              })
+              delete instance.promise
+              resolve(instance)
             })
-            delete instance.promise
-            resolve(instance)
-          })
-          .catch(console.error)
-      }),
-    }
+            .catch(console.error)
+        }),
+      }
 
-    return instance
-  }
-})(jQuery)
+      return instance
+    }
+  })(jQuery)
