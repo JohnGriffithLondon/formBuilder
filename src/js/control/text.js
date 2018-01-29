@@ -31,4 +31,6 @@ export default class controlText extends control {
 
 // register this control for the following types & text subtypes
 control.register(['text', 'file', 'date', 'number'], controlText);
-control.register(['text', 'password', 'email', 'color', 'tel'], controlText, 'text');
+control.register(['date', 'time','datetime'], controlText, 'date');
+control.register(['number', 'money'], controlText, 'number');
+control.register(['text', 'password', 'email', 'tel'], controlText, 'text');

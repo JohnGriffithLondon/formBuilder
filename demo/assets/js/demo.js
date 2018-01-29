@@ -108,17 +108,17 @@ jQuery(function($) {
   };
 
   var typeUserAttrs = {
-    text: {
-      className: {
-        label: 'Class',
-        options: {
-          'red form-control': 'Red',
-          'green form-control': 'Green',
-          'blue form-control': 'Blue'
-        },
-        style: 'border: 1px solid red'
-      }
-    }
+    // text: {
+    //   className: {
+    //     label: 'Class',
+    //     options: {
+    //       'red form-control': 'Red',
+    //       'green form-control': 'Green',
+    //       'blue form-control': 'Blue'
+    //     },
+    //     style: 'border: 1px solid red'
+    //   }
+    // }
   };
 
   // test disabledAttrs

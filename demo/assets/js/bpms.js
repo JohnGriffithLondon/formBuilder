@@ -1,3 +1,4 @@
+//https://emojipedia.org
 jQuery(function ($) {
   var fields = [
     // {
@@ -32,9 +33,16 @@ jQuery(function ($) {
       toggle: true
     },
     {
-      type: 'header',
+      type: 'split',
       label: 'Split',
-      subtype: 'split'
+      subtype: 'h3',
+      icon: '↙️'
+    },
+    {
+      type: 'remotecomplete',
+      label: 'Remote Complete',
+      subtype: 'psbi',
+      icon: '🔍'
     }
   ];
 
@@ -71,6 +79,9 @@ jQuery(function ($) {
     autocomplete: ['access'],
     file: ['multiple', 'subtype'],
     'checkbox-group': ['toggle'],
+    remotecomplete: ['options'],
+    number: ['step'],
+    textarea:['subtype','rows']
   };
 
   var typeUserAttrs = {
@@ -83,7 +94,7 @@ jQuery(function ($) {
 
   var fbOptions = {
     subtypes: {
-      text: ['datetime-local']
+      //text: ['datetime-local']
     },
     onSave: function (e, formData) {
       toggleEdit();
@@ -104,9 +115,10 @@ jQuery(function ($) {
     typeUserAttrs: typeUserAttrs,
     disableInjectedStyle: false,
     actionButtons: actionButtons,
-    disableFields: ['button', 'hidden', 'paragraph', 'header'], //['autocomplete'],
+    disableFields: ['button', 'hidden', 'paragraph', 'split', 'header','autocomplete', 'remotecomplete'], //['autocomplete'], , 'header'
     replaceFields: [], //replaceFields,
     disabledFieldButtons: {
+      split: ['edit'],
       text: ['copy']
     },
     //controlPosition: 'left',
@@ -114,16 +126,19 @@ jQuery(function ($) {
     controlOrder: [
       'text',
       'textarea',
+      'date',
+      'file',
+      'number',
       'autocomplete',
+      'remotecomplete',
       'button',
       'checkbox',
       'checkbox-group',
-      'date',
-      'file',
+     
       'header',
       'hidden',
       'paragraph',
-      'number',
+     
       'radio-group',
       'select'
     ],

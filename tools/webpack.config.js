@@ -2,9 +2,9 @@ import pkg from '../package.json';
 import {resolve} from 'path';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import CompressionPlugin from 'compression-webpack-plugin';
+// import CompressionPlugin from 'compression-webpack-plugin';
 import {BannerPlugin} from 'webpack';
-import BabiliPlugin from 'babili-webpack-plugin';
+// import BabiliPlugin from 'babili-webpack-plugin';
 
 // hack for Ubuntu on Windows
 try {
@@ -36,7 +36,7 @@ const webpackConfig = {
   output: {
     path: outputDir,
     publicPath: '/assets/js/',
-    filename: '[name].min.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -68,7 +68,7 @@ const webpackConfig = {
           {
             loader: 'css-loader',
             query: {
-              minimize: true,
+              minimize: false,
               sourceMaps: !PRODUCTION
             }
           },
@@ -98,19 +98,8 @@ const webpackConfig = {
     new ExtractTextPlugin({
       filename: '[name].[contenthash].css'
     }),
-    new BabiliPlugin({
-      removeDebugger: PRODUCTION
-    }, {
-      comments: !PRODUCTION
-    }),
-    new BannerPlugin(bannerTemplate),
-    new CompressionPlugin({
-        asset: '[path].gz[query]',
-        algorithm: 'gzip',
-        test: /\.(js)$/,
-        threshold: 10240,
-        minRatio: 0.8
-      })
+ 
+    new BannerPlugin(bannerTemplate)
   ],
   devtool,
   resolve: {
@@ -121,9 +110,9 @@ const webpackConfig = {
     extensions: ['.js', '.scss']
   },
   devServer: {
-    inline: true,
+    inline: false,
     contentBase: 'demo/',
-    noInfo: true
+    noInfo: false
   }
 };
 

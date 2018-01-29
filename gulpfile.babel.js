@@ -167,8 +167,8 @@ gulp.task('lint', function() {
 gulp.task('demoVendor', () => {
   return gulp.src(files.demo.vendor.js)
     .pipe(plugins.plumber())
-    .pipe(plugins.concat('vendor.min.js'))
-    .pipe(plugins.uglify())
+    // .pipe(plugins.concat('vendor.min.js'))
+    // .pipe(plugins.uglify())
     .pipe(gulp.dest('demo/assets/js/'));
 });
 
@@ -186,7 +186,7 @@ gulp.task('js', function() {
       params: ['$'],
       args: ['jQuery']
     }))
-    .pipe(plugins.uglify())
+    // .pipe(plugins.uglify())
     .pipe(gulp.dest('demo/assets/js/control_plugins'))
     .pipe(gulp.dest('dist/control_plugins'));
 
@@ -199,7 +199,7 @@ gulp.task('js', function() {
     .pipe(buffer())
     .pipe(plugins.plumber())
     .pipe(banner())
-    .pipe(plugins.concat(fileName + '.js'))
+    // .pipe(plugins.concat(fileName + '.js'))
     .pipe(plugins.iife({
       useStrict: false,
       params: ['$'],
@@ -207,10 +207,10 @@ gulp.task('js', function() {
     }))
     .pipe(gulp.dest('demo/assets/js/'))
     .pipe(gulp.dest('dist/'))
-    .pipe(plugins.uglify())
+    // .pipe(plugins.uglify())
     .pipe(banner())
     // .pipe(gulp.dest('demo/assets/js/'+ fileName + '.min.js'));
-    .pipe(plugins.concat(fileName + '.min.js'))
+    // .pipe(plugins.concat(fileName + '.min.js'))
     .pipe(gulp.dest('demo/assets/js/'))
     .pipe(gulp.dest('dist/'));
   });
@@ -228,17 +228,17 @@ gulp.task('devJS', function() {
   gulp.src('src/js/control_plugins/*.es5.js')
     .pipe(plugins.regexRename(/\.es5\.js$/, '.min.js'))
     .pipe(plugins.plumber())
-    .pipe(plugins.sourcemaps.init({
-      loadMaps: true
-    }))
+    // .pipe(plugins.sourcemaps.init({
+    //   loadMaps: true
+    // }))
     .pipe(plugins.iife({
       useStrict: false,
       params: ['$'],
       args: ['jQuery']
     }))
-    .pipe(plugins.uglify())
+    // .pipe(plugins.uglify())
     .on('control plugin error', console.log)
-    .pipe(plugins.sourcemaps.write('/'))
+    // .pipe(plugins.sourcemaps.write('/'))
     .pipe(gulp.dest('demo/assets/js/control_plugins'));
 
   return jsFiles.forEach(function(jsFileGlob, key) {
@@ -249,17 +249,17 @@ gulp.task('devJS', function() {
       .pipe(source(fileName + '.min.js'))
       .pipe(buffer())
       .pipe(plugins.plumber())
-      .pipe(plugins.sourcemaps.init({
-        loadMaps: true
-      }))
+      // .pipe(plugins.sourcemaps.init({
+      //   loadMaps: true
+      // }))
       .pipe(plugins.iife({
         useStrict: false,
         params: ['$'],
         args: ['jQuery']
       }))
-      .pipe(plugins.uglify())
+      // .pipe(plugins.uglify())
       .on('error', console.log)
-      .pipe(plugins.sourcemaps.write('/'))
+      // .pipe(plugins.sourcemaps.write('/'))
       .pipe(gulp.dest('demo/assets/js'))
       .pipe(bsync.reload({
         stream: true

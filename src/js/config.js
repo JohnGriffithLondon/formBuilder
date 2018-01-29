@@ -17,6 +17,7 @@ export const defaultOptions = {
     'select',
     'text',
     'textarea',
+    'split'
   ],
   dataType: 'json',
   // Array of fields to disable
@@ -115,6 +116,7 @@ export const defaultI18n = {
       formUpdated: 'Form Updated',
       getStarted: 'Drag a field from the right to this area',
       header: 'Header',
+      split: '↙️',
       hide: 'Edit',
       hidden: 'Hidden Input',
       inline: 'Inline',
@@ -131,6 +133,7 @@ export const defaultI18n = {
       no: 'No',
       noFieldsToClear: 'There are no fields to clear',
       number: 'Number',
+      money: 'Money',
       off: 'Off',
       on: 'On',
       option: 'Option',

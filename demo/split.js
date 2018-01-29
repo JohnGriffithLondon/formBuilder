@@ -13,6 +13,7 @@ window.fbControls.push(function (controlClass, allControlClasses) {
      */
     static get definition() {
       return {
+        icon: '↙️',
         i18n: {
           default: 'Split'
         }
@@ -20,15 +21,12 @@ window.fbControls.push(function (controlClass, allControlClasses) {
     }
 
     /**
-     * configure the split editor requirements
+     * build a text DOM element, supporting other jquery text form-control's
+     * @return {Object} DOM Element to be injected into the form.
      */
-    configure() {
-      this.config.label = 'abc';
-      
-
-    }
-
-
+    // build() {
+    //   return this.markup('input', null, { id: this.config.name });
+    // }
     /**
      * When the element is rendered into the DOM, execute the following code to initialise it
      * @param {Object} evt - event
@@ -39,6 +37,7 @@ window.fbControls.push(function (controlClass, allControlClasses) {
     }
   }
 
-  // register trumbowyg as a richtext control
-  controlHeader.register('split', controlSplit, 'header');
+ // controlClass.register('split', controlSplit);// 'header'
+
+  // controlHeader.register('split', controlSplit, 'header');
 });

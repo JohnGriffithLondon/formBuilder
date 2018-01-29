@@ -1,17 +1,21 @@
 {
+	//text
 	t1: "text",
+	t7: "email",
+	t8: "password",
+	t10: "tel",
 
+	//textarea
 	t2: "textarea",
 
+	//date
 	t3: "date",
 	t4: "time",
 	t5: "date and time",
 
 
+	//number
 	t6: "number",
-	t7: "email",
-	t8: "password",
-	t10: "tel",
 	t11: "money",
 
 

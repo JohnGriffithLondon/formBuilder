@@ -321,7 +321,7 @@ const FormBuilder = function (opts, element) {
       field.name = utils.nameAttr(field)
     }
 
-    if (isNew && utils.inArray(field.type, ['text', 'number', 'file', 'date', 'select', 'textarea', 'autocomplete'])) {
+    if (isNew && utils.inArray(field.type, ['text', 'number', 'file', 'date', 'select', 'textarea', 'autocomplete', 'remotecomplete'])) {
       field.className = field.className || 'form-control'
     }
 
@@ -380,7 +380,7 @@ const FormBuilder = function (opts, element) {
         value: utils.hyphenCase(label),
       }
 
-      if (type !== 'autocomplete') {
+      if (type !== 'autocomplete' && type !== 'remotecomplete') {
         optionData.selected = false
       }
 
@@ -419,11 +419,12 @@ const FormBuilder = function (opts, element) {
 
   const defaultFieldAttrs = type => {
     const defaultAttrs = ['required', 'label', 'description', 'placeholder', 'className', 'name', 'access', 'value']
-    let noValFields = ['header', 'paragraph', 'file', 'autocomplete'].concat(d.optionFields)
+    let noValFields = ['header', 'paragraph', 'file', 'autocomplete', 'remotecomplete', 'split'].concat(d.optionFields)
 
     let valueField = !utils.inArray(type, noValFields)
 
     const typeAttrsMap = {
+      remotecomplete: defaultAttrs.concat(['subtype']),
       autocomplete: defaultAttrs.concat(['options']),
       button: ['label', 'subtype', 'style', 'className', 'name', 'value', 'access'],
       checkbox: [
@@ -439,12 +440,13 @@ const FormBuilder = function (opts, element) {
         'options',
       ],
       text: defaultAttrs.concat(['subtype', 'maxlength']),
-      date: defaultAttrs,
+      date: defaultAttrs.concat(['subtype']),
       file: defaultAttrs.concat(['subtype', 'multiple']),
       header: ['label', 'subtype', 'className', 'access'],
+      split: ['label', 'subtype', 'className', 'access'],
       hidden: ['name', 'value', 'access'],
       paragraph: ['label', 'subtype', 'className', 'access'],
-      number: defaultAttrs.concat(['min', 'max', 'step']),
+      number: defaultAttrs.concat(['min', 'max', 'step','subtype']),
       select: defaultAttrs.concat(['multiple', 'options']),
       textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows']),
     }
@@ -459,7 +461,7 @@ const FormBuilder = function (opts, element) {
     }
 
     // Help Text / Description Field
-    if (utils.inArray(type, ['header', 'paragraph', 'button'])) {
+    if (utils.inArray(type, ['header', 'paragraph', 'button', 'split'])) {
       utils.remove('description', typeAttrs)
     }
 
@@ -901,7 +903,7 @@ const FormBuilder = function (opts, element) {
 
   const requiredField = fieldData => {
     let { type } = fieldData
-    let noRequire = ['header', 'paragraph', 'button']
+    let noRequire = ['header', 'paragraph', 'button', 'split']
     let noMake = []
     let requireField = ''
 
