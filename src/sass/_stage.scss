@@ -281,7 +281,7 @@
       display: none;
     }
 
-    select, input[type='text'], textarea, input[type='number'] {
+    select, input[type='text'], textarea, input[type='number'], input[type='money'] {
       background-color: $white;
       border: 1px solid $grey-light;
       box-shadow: inset 0 1px 1px $input-box-shadow-color;
@@ -293,9 +293,9 @@
       display: inline-block;
     }
 
-    input[type='date'] {
-      width: auto;
-    }
+    // input[type='date'] {
+    //   width: auto;
+    // }
 
     select[multiple] {
       height: auto;
@@ -305,9 +305,9 @@
       font-weight: normal;
     }
 
-    input[type='number'] {
-      width: auto;
-    }
+    // input[type='number'] {
+    //   width: auto;
+    // }
 
     input[type='color'] {
       width: 60px;
@@ -541,7 +541,11 @@
 
     input[type='text'],
     input[type='number'],
+    input[type='money'],
     input[type='date'],
+    input[type='time'],
+    input[type='datetime'],
+    input[type='datetime-local'],
     input[type='color'],
     textarea,
     select {
@@ -559,10 +563,9 @@
       }
     }
 
-
-    input[type='number'] {
-      width: auto;
-    }
+    // input[type='number'] {
+    //   width: auto;
+    // }
 
     .btn-group {
       margin-left: 2%;

@@ -2,7 +2,7 @@ export const instanceDom = {}
 export const defaultSubtypes = {
   text: ['text', 'password', 'email', 'tel'],
   number: ['number', 'money'],
-  date: ['date', 'time', 'datetime'],
+  date: ['date', 'time', 'datetime-local'],
   header: ['h1', 'h2', 'h3'],
   split: ['h1', 'h2', 'h3'],
   button: ['button', 'submit', 'reset'],
