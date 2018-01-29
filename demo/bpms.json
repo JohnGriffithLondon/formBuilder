@@ -1,45 +1,63 @@
-{
-	//text
-	t1: "text",
-	t7: "email",
-	t8: "password",
-	t10: "tel",
 
-	//textarea
-	t2: "textarea",
+源码：
+https://github.com/JohnGriffithLondon/formBuilder
 
-	//date
-	t3: "date",
-	t4: "time",
-	t5: "date and time",
+页面：
+demo/bpms.html
+demo/index.html
 
+​控件：
+    //text
+    t1: "text",
+    t7: "email",
+    t8: "password",
+    t10: "tel",
 
-	//number
-	t6: "number",
-	t11: "money",
+    //textarea
+    t2: "textarea",
 
-
-	t9: "file",
-
-
-	cbv: "checkbox vertical",
-	cbh: "checkbox horizontal",
+    //date
+    t3: "date",
+    t4: "time",
+    t5: "date and time",
 
 
-	rbv: "radio button vertical",
-	rbh: "radio button horizontal",
+    //number
+    t6: "number",
+    t11: "money",
 
+    //file
+    t9: "file",
 
-	sbs: "select button single",
-	sbm: "select button multiple",
-	sbft: "select button filterable",
+    //checkbox
+    cbv: "checkbox vertical",
+    cbh: "checkbox horizontal",
 
+    //radio
+    rbv: "radio button vertical",
+    rbh: "radio button horizontal",
 
-	fs: "flip switch",
+    //select
+    sbs: "select button single",
+    sbm: "select button multiple",
+    sbft: "select button filterable",
 
-	
-	psbi: "autocomplete for user id",
-	psbm: "autocomplete for user email",
-	psbn: "autocomplete for user name",
-	bpid: "autocomplete for process definition id"
-}
+    //flip switch
+    fs: "flip switch",
+
+    //remote complete
+    psbi: "autocomplete for user id",
+    psbm: "autocomplete for user email",
+    psbn: "autocomplete for user name",
+    bpid: "autocomplete for process definition id",
+
+    //split
+    split:"split"
+图标: 
+    https://emojipedia.org
+
+讨论：
+	1. 控件是否够用
+	2. table怎么处理
+	3. options怎么处理
+	4. 前后流程
