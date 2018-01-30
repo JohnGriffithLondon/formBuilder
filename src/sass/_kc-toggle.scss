@@ -11,7 +11,9 @@
     border: 1px solid lighten($grey, 40%);
     padding: 2px;
     overflow: hidden;
-    float: left;
+//    float: left;
+vertical-align: middle;
+margin-left: 5px;
     margin-right: 5px;
     will-change: transform;
 
@@ -55,9 +57,21 @@
     pointer-events: none;
     margin: 0;
 
-    &:checked + span {
+   &:not(:checked) + span {
       &::after {
         transform: translateX(100%);
+        background-color: $copy;
+      }
+
+      &::before {
+        background-color: $copy;
+      }
+    }
+
+    &:checked + span {
+      &::after {
+      
+        background-color: $copy;
       }
 
       &::before {

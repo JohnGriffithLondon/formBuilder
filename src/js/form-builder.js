@@ -392,6 +392,9 @@ const FormBuilder = function (opts, element) {
       if (utils.inArray(type, ['checkbox-group', 'checkbox'])) {
         defaultOptCount = [1]
       }
+      else if (utils.inArray(type, ['flipswitch'])) {
+        defaultOptCount = [1, 2]
+      }
       values = defaultOptCount.map(function (index) {
         let label = `${i18n.option} ${index}`
         return optionDataTemplate(label)
@@ -405,15 +408,13 @@ const FormBuilder = function (opts, element) {
       // ensure option data is has all required keys
       values.forEach(option => Object.assign({}, { selected: false }, option))
     }
-
     const optionActionsWrap = m('div', optionActions, { className: 'option-actions' })
     const options = m('ol', values.map(option => selectFieldOptions(name, option, isMultiple)), {
       className: 'sortable-options',
     })
-    const optionsWrap = m('div', [options, optionActionsWrap], { className: 'sortable-options-wrap' })
-
+    let allOptions = type == 'flipswitch' ? [options] : [options, optionActionsWrap];
+    const optionsWrap = m('div', allOptions, { className: 'sortable-options-wrap' })
     fieldOptions.push(optionsWrap)
-
     return m('div', fieldOptions, { className: 'form-group field-options' }).outerHTML
   }
 
@@ -446,11 +447,18 @@ const FormBuilder = function (opts, element) {
       split: ['label', 'subtype', 'className', 'access'],
       hidden: ['name', 'value', 'access'],
       paragraph: ['label', 'subtype', 'className', 'access'],
-      number: defaultAttrs.concat(['min', 'max', 'step','subtype']),
+      number: defaultAttrs.concat(['min', 'max', 'step', 'subtype']),
       select: defaultAttrs.concat(['multiple', 'options']),
       textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows']),
+      flipswitch: [
+        'label',
+        'description',
+        'className',
+        'name',
+        'other',
+        'options',
+      ]
     }
-
     typeAttrsMap['checkbox-group'] = typeAttrsMap.checkbox
     typeAttrsMap['radio-group'] = typeAttrsMap.checkbox
 
@@ -651,7 +659,7 @@ const FormBuilder = function (opts, element) {
     }
     let label = `<label for="${textAttrs.id}">${i18n[name]}</label>`
 
-    let optionInputs = ['checkbox', 'checkbox-group', 'radio-group']
+    let optionInputs = ['checkbox', 'checkbox-group', 'radio-group', 'flipswitch']
     if (!utils.inArray(textAttrs.type, optionInputs)) {
       textAttrs.className.push('form-control')
     }
@@ -1048,8 +1056,9 @@ const FormBuilder = function (opts, element) {
       className: 'remove btn',
       title: i18n.removeMessage,
     }
-    optionInputs.push(utils.markup('a', i18n.remove, removeAttrs))
-
+    if (name.indexOf('flipswitch') !== 0) {
+      optionInputs.push(utils.markup('a', i18n.remove, removeAttrs))
+    }
     let field = utils.markup('li', optionInputs)
 
     return field.outerHTML
@@ -1096,7 +1105,7 @@ const FormBuilder = function (opts, element) {
     e.preventDefault()
     let options = field.querySelector('.sortable-options')
     let optionsCount = options.childNodes.length
-    if (optionsCount <= 2 && !type.includes('checkbox')) {
+    if (optionsCount <= 2 && !type.includes('checkbox') && !type.includes('flipswitch')) {
       opts.notify.error('Error: ' + i18n.minOptionMessage)
     } else {
       $option.slideUp('250', () => {
@@ -1111,7 +1120,7 @@ const FormBuilder = function (opts, element) {
   $stage.on('touchstart', 'input', e => {
     let $input = $(this)
     if (e.handled !== true) {
-      if ($input.attr('type') === 'checkbox') {
+      if ($input.attr('type') === 'checkbox' || $input.attr('type') === 'flipswitch') {
         $input.trigger('click')
       } else {
         $input.focus()

@@ -315,7 +315,7 @@ export default class Helpers {
       let name = utils.camelCase(attr.getAttribute('name'))
       if (attr.attributes['contenteditable']) {
         value = attr.innerHTML
-      } else if (attr.type === 'checkbox') {
+      } else if (attr.type === 'checkbox'|| attr.type === 'flipswitch') {
         value = attr.checked
       } else {
         value = attr.value

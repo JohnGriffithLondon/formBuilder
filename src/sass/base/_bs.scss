@@ -220,7 +220,9 @@ textarea.form-control {
 
 .fb-checkbox-group {
   .checkbox,
-  .checkbox-inline{
+  .flipswitch,
+  .checkbox-inline,
+  .flipswitch-inline{
     padding-left: 0;
     input {
       position:relative;
@@ -246,12 +248,14 @@ textarea.form-control {
 }
 
 .fb-checkbox-inline,
+.fb-flipswitch-inline,
 .fb-radio-inline {
   display: inline-block;
   vertical-align: middle;
 }
 
 .fb-checkbox-inline:first-child,
+.fb-flipswitch-inline:first-child,
 .fb-radio-inline:first-child {
   padding-left: 0;
 }

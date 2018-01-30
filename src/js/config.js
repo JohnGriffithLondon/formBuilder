@@ -15,6 +15,7 @@ export const defaultOptions = {
     'number',
     'radio-group',
     'select',
+    'flipswitch',
     'text',
     'textarea',
     'split'

@@ -63,12 +63,11 @@
 /******/ 	__webpack_require__.p = "/assets/js/control_plugins";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 2:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -83,49 +82,38 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 if (!window.fbControls) window.fbControls = [];
-window.fbControls.push(function (controlClass) {
-  var controlStarRating = function (_controlClass) {
-    _inherits(controlStarRating, _controlClass);
+window.fbControls.push(function (controlClass, allControlClasses) {
+  var controlCheckbox = allControlClasses.checkbox;
 
-    function controlStarRating() {
-      _classCallCheck(this, controlStarRating);
+  var controlFlipswitch = function (_controlCheckbox) {
+    _inherits(controlFlipswitch, _controlCheckbox);
 
-      return _possibleConstructorReturn(this, _controlClass.apply(this, arguments));
+    function controlFlipswitch() {
+      _classCallCheck(this, controlFlipswitch);
+
+      return _possibleConstructorReturn(this, _controlCheckbox.apply(this, arguments));
     }
 
-    controlStarRating.prototype.configure = function configure() {
-      this.js = '//cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js';
-      this.css = '//cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css';
+    controlFlipswitch.prototype.configure = function configure() {
+      this.config.toggle = true;
     };
 
-    controlStarRating.prototype.build = function build() {
-      return this.markup('span', null, { id: this.config.name });
-    };
-
-    controlStarRating.prototype.onRender = function onRender() {
-      var value = this.config.value || 3.6;
-      $('#' + this.config.name).rateYo({ rating: value });
-    };
-
-    _createClass(controlStarRating, null, [{
+    _createClass(controlFlipswitch, null, [{
       key: 'definition',
       get: function get() {
         return {
-          icon: '🌟',
           i18n: {
-            default: 'Star Rating'
+            flipswitch: 'Flip Switch'
           }
         };
       }
     }]);
 
-    return controlStarRating;
-  }(controlClass);
+    return controlFlipswitch;
+  }(controlCheckbox);
 
-  controlClass.register('starRating', controlStarRating);
-  return controlStarRating;
+  controlClass.register(['flipswitch'], controlFlipswitch);
 });
 
 /***/ })
-
-/******/ });
+/******/ ]);

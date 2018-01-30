@@ -27,20 +27,21 @@ jQuery(function ($) {
 
 
 
-    {
-      type: 'checkbox',
-      label: 'Flip Switch',
-      toggle: true
-    },
+    // {
+    //   type: 'flipswitch',
+    //   label: 'Flip Switch',
+    //   //toggle: true
+    // },
     {
       type: 'split',
       label: 'Split',
       subtype: 'h3',
-      icon: '↙️'
+      icon: '↪️'
     },
+
     {
       type: 'remotecomplete',
-      label: 'Remote Complete',
+      label: 'Auto Complete',
       subtype: 'psbi',
       icon: '🔍'
     }
@@ -81,7 +82,7 @@ jQuery(function ($) {
     'checkbox-group': ['toggle'],
     remotecomplete: ['options'],
     number: ['step'],
-    textarea:['subtype','rows']
+    textarea: ['subtype', 'rows']
   };
 
   var typeUserAttrs = {
@@ -115,7 +116,7 @@ jQuery(function ($) {
     typeUserAttrs: typeUserAttrs,
     disableInjectedStyle: false,
     actionButtons: actionButtons,
-    disableFields: ['button', 'hidden', 'paragraph', 'split', 'header','autocomplete', 'remotecomplete'], //['autocomplete'], , 'header'
+    disableFields: ['button', 'hidden', 'paragraph', 'split', 'header', 'autocomplete', 'remotecomplete','checkbox'], //['autocomplete'], , 'header'
     replaceFields: [], //replaceFields,
     disabledFieldButtons: {
       split: ['edit'],
@@ -134,14 +135,15 @@ jQuery(function ($) {
       'button',
       'checkbox',
       'checkbox-group',
-     
+      'radio-group',
+      'select',
+      'flipswitch',
       'header',
       'hidden',
       'paragraph',
-     
-      'radio-group',
-      'select'
+      'split'
     ],
+
   };
   var formData = window.sessionStorage.getItem('formData');
   var editing = true;

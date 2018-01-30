@@ -25,13 +25,16 @@ export default class controlSelect extends control {
    */
   build() {
     let options = [];
-    let {values, value, placeholder, type, inline, other, toggle, ...data} = this.config;
+    let { values, value, placeholder, type, inline, other, toggle, ...data } = this.config;
     let optionType = type.replace('-group', '');
+    if (optionType == 'flipswitch') {
+      optionType = 'checkbox';
+    }
     let isSelect = type === 'select';
     if (data.multiple || type === 'checkbox-group') {
       data.name = data.name + '[]';
     }
-
+    let isFlipswitch = (type == 'flipswitch')
     if (type === 'checkbox-group' && data.required) {
       this.onRender = this.groupRequired;
     }
@@ -51,9 +54,9 @@ export default class controlSelect extends control {
       for (let i = 0; i < values.length; i++) {
         let option = values[i];
         if (typeof option === 'string') {
-          option = {'label': option, 'value': option};
+          option = { 'label': option, 'value': option };
         }
-        let {label = '', ...optionAttrs} = option;
+        let { label = '', ...optionAttrs } = option;
         optionAttrs.id = `${data.id}-${i}`;
 
         // don't select this option if a placeholder is defined
@@ -72,6 +75,7 @@ export default class controlSelect extends control {
         } else {
           let wrapperClass = optionType;
           let labelContents = [label];
+
           if (inline) {
             wrapperClass += '-inline';
           }
@@ -81,17 +85,27 @@ export default class controlSelect extends control {
             delete optionAttrs.selected;
           }
           let input = this.markup('input', null, Object.assign({}, data, optionAttrs));
-          let labelAttrs = {for: optionAttrs.id};
+          let labelAttrs = { for: optionAttrs.id };
           label = this.markup('label', labelContents, labelAttrs);
           let output = [input, label];
           if (toggle) {
             labelAttrs.className = 'kc-toggle';
-            labelContents.unshift(input, this.markup('span'));
+
+            if (isFlipswitch) {
+              let label2 = values[1];
+              labelContents.unshift(input);
+              labelContents.push(this.markup('span'), label2.label);
+            } else {
+              labelContents.unshift(input, this.markup('span'));
+            }
             output = this.markup('label', labelContents, labelAttrs);
           }
 
-          let wrapper = this.markup('div', output, {className: wrapperClass});
+          let wrapper = this.markup('div', output, { className: wrapperClass });
           options.push(wrapper);
+        }
+        if (isFlipswitch) {
+          break;
         }
       }
 
@@ -131,8 +145,8 @@ export default class controlSelect extends control {
           document.createTextNode('Other'),
           this.markup('input', null, otherValAttrs)
         ];
-        let inputLabel = this.markup('label', otherInputs, {for: optionAttrs.id});
-        let wrapper = this.markup('div', [primaryInput, inputLabel], {className: wrapperClass});
+        let inputLabel = this.markup('label', otherInputs, { for: optionAttrs.id });
+        let wrapper = this.markup('div', [primaryInput, inputLabel], { className: wrapperClass });
         options.push(wrapper);
       }
     }
@@ -141,7 +155,7 @@ export default class controlSelect extends control {
     if (type == 'select') {
       return this.markup(optionType, options, data);
     } else {
-      return this.markup('div', options, {className: type});
+      return this.markup('div', options, { className: type });
     }
   }
 

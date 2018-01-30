@@ -55,6 +55,7 @@
 .icon-autocomplete:before { content: '\e800'; } /* '' */
 .icon-date:before { content: '\e801'; } /* '' */
 .icon-checkbox:before { content: '\e802'; } /* '' */
+.icon-flipswitch:before { content: '\e802'; } /* '' */
 .icon-checkbox-group:before { content: '\e803'; } /* '' */
 .icon-radio-group:before { content: '\e804'; } /* '' */
 .icon-rich-text:before { content: '\e805'; } /* '' */
