@@ -96,7 +96,6 @@ window.fbControls.push(function (controlClass, allControlClasses) {
 
     controlFlipswitch.prototype.configure = function configure() {
       this.config.toggle = true;
-      console.log(this.config.options);
     };
 
     _createClass(controlFlipswitch, null, [{

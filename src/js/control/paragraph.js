@@ -6,6 +6,14 @@ import utils from '../utils';
  */
 export default class controlParagraph extends control {
 
+
+    /**
+     * javascript & css to load
+     */
+    configure() {
+      console.log(this.config.lable);
+    }
+
   /**
    * build a paragraph DOM element
    * @return {Object} DOM Element to be injected into the form.
