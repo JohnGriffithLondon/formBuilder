@@ -11,7 +11,7 @@ export default class controlParagraph extends control {
      * javascript & css to load
      */
     configure() {
-      console.log(this.config.lable);
+      console.log(this.config);
     }
 
   /**

@@ -459,9 +459,33 @@ const FormBuilder = function (opts, element) {
         'options',
       ]
     }
-    typeAttrsMap['checkbox-group'] = typeAttrsMap.checkbox
-    typeAttrsMap['radio-group'] = typeAttrsMap.checkbox
-
+    typeAttrsMap['checkbox-group'] =  [
+      'required',
+      'label',
+      'description',
+      'toggle',
+      'inline',
+      'className',
+      'name',
+      'access',
+      'other',
+      'subtype',
+      'options',
+     
+    ]
+    typeAttrsMap['radio-group'] =  [
+      'required',
+      'label',
+      'description',
+      'toggle',
+      'inline',
+      'className',
+      'name',
+      'access',
+      'other',
+      'subtype',
+      'options'
+    ]
     let typeAttrs = typeAttrsMap[type]
 
     if (type === 'radio-group') {

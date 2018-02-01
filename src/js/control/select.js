@@ -18,6 +18,15 @@ export default class controlSelect extends control {
       }
     };
   }
+  /**
+    * config for subtype
+    */
+  configure() {
+    if (this.config.type == 'horizontal') {
+      this.config.inline = true;
+    }
+    console.log(this);
+  }
 
   /**
    * build a text DOM element, supporting other jquery text form-control's
@@ -26,6 +35,9 @@ export default class controlSelect extends control {
   build() {
     let options = [];
     let { values, value, placeholder, type, inline, other, toggle, ...data } = this.config;
+    if (type == 'vertical' || type == 'horizontal') {
+      type = this.type;
+    }
     let optionType = type.replace('-group', '');
     if (optionType == 'flipswitch') {
       optionType = 'checkbox';
@@ -213,3 +225,5 @@ export default class controlSelect extends control {
 
 // register this control for the following types & text subtypes
 control.register(['select', 'checkbox-group', 'radio-group', 'checkbox'], controlSelect);
+control.register(['vertical', 'horizontal'], controlSelect, 'checkbox-group');
+control.register(['vertical', 'horizontal'], controlSelect, 'radio-group');

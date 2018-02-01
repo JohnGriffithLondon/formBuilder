@@ -44,6 +44,16 @@ jQuery(function ($) {
       label: 'Auto Complete',
       subtype: 'psbi',
       icon: '🔍'
+    },
+    {
+      type: 'checkbox-group',
+      label: 'Checkbox Group',
+      subtype: 'vertical',
+    },
+    {
+      type: 'radio-group',
+      label: 'Radio Group',
+      subtype: 'vertical',
     }
   ];
 
@@ -79,7 +89,8 @@ jQuery(function ($) {
   var typeUserDisabledAttrs = {
     autocomplete: ['access'],
     file: ['multiple', 'subtype'],
-    'checkbox-group': ['toggle'],
+    'checkbox-group': ['toggle', 'inline'],
+    'radio-group': ['inline'],
     remotecomplete: ['options'],
     number: ['step'],
     textarea: ['subtype', 'rows']
@@ -116,7 +127,7 @@ jQuery(function ($) {
     typeUserAttrs: typeUserAttrs,
     disableInjectedStyle: false,
     actionButtons: actionButtons,
-    disableFields: ['button', 'hidden', 'paragraph', 'split', 'header', 'autocomplete', 'remotecomplete','checkbox'], //['autocomplete'], , 'header'
+    disableFields: ['button', 'hidden', 'paragraph', 'split', 'header', 'autocomplete', 'remotecomplete', 'checkbox','checkbox-group','radio-group'], //['autocomplete'], , 'header'
     replaceFields: [], //replaceFields,
     disabledFieldButtons: {
       split: ['edit'],
