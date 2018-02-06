@@ -14,7 +14,8 @@ window.fbControls.push(function (controlClass, allControlClasses) {
     static get definition() {
       return {
         i18n: {
-          flipswitch: 'Flip Switch'
+          // default: 'flipswitch',
+          // flipswitch: 'flipswitch'
         }
       };
     }
@@ -24,6 +25,9 @@ window.fbControls.push(function (controlClass, allControlClasses) {
      */
     configure() {
       this.config.toggle = true;
+      // this.config.required = true; 
+      // this.required = true;
+      // console.log(this)
     }
 
   }

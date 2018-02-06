@@ -71,11 +71,11 @@ margin-left: 5px;
     &:checked + span {
       &::after {
       
-        background-color: $copy;
+       // background-color: $copy;
       }
 
       &::before {
-        background-color: $copy;
+        //background-color: $copy;
       }
     }
   }

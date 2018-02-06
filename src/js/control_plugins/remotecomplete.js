@@ -13,12 +13,12 @@ window.fbControls.push(function (controlClass, allControlClasses) {
      */
     static get definition() {
       return {
-        i18n: {
-          psbi: 'psbi (User Id)',
-          psbm: 'psbm (Email)',
-          psbn: 'psbn (User Name)',
-          bpid: 'bpid (Process Definition)',
-        }
+        // i18n: {
+        //   psbi: 'psbi',
+        //   psbm: 'psbm',
+        //   psbn: 'psbn',
+        //   bpid: 'bpid',
+        // }
       };
     }
 

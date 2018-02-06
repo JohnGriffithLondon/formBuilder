@@ -40,7 +40,9 @@ export default class controlFineUploader extends controlText {
   static get definition() {
     return {
       i18n: {
-        default: 'Fine Uploader'
+       // default: 'Fine Uploader',
+       file: 'fileUpload',
+       'file-in-tab':'fileUploadInTab',
       }
     };
   }
@@ -160,8 +162,8 @@ export default class controlFineUploader extends controlText {
    * @return {Object} DOM Element to be injected into the form.
    */
   build() {
-    this.input = this.markup('input', null, {type: 'hidden', name: this.config.name, id: this.config.name});
-    this.wrapper = this.markup('div', '', {id: this.config.name + '-wrapper'});
+    this.input = this.markup('input', null, { type: 'hidden', name: this.config.name, id: this.config.name });
+    this.wrapper = this.markup('div', '', { id: this.config.name + '-wrapper' });
     return [this.input, this.wrapper];
   }
 
@@ -239,4 +241,5 @@ export default class controlFineUploader extends controlText {
 // register fineuploader as a subtype to the 'file' type control (defined in text.js)
 // also register the default file uploader as a subtype too so it appears in the dropdown
 controlText.register('file', controlText, 'file');
-controlText.register('fineuploader', controlFineUploader, 'file');
+controlText.register('file-in-tab', controlText, 'file');
+// controlText.register('fineuploader', controlFineUploader, 'file');

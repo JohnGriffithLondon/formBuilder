@@ -106,10 +106,10 @@ window.fbControls.push(function (controlClass, allControlClasses) {
       get: function get() {
         return {
           i18n: {
-            psbi: 'psbi (User Id)',
-            psbm: 'psbm (Email)',
-            psbn: 'psbn (User Name)',
-            bpid: 'bpid (Process Definition)'
+            psbi: 'psbi',
+            psbm: 'psbm',
+            psbn: 'psbn',
+            bpid: 'bpid'
           }
         };
       }

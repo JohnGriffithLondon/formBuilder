@@ -1,94 +1,58 @@
 //https://emojipedia.org
 jQuery(function ($) {
   var fields = [
+ 
     // {
-    //   type: 'autocomplete',
-    //   label: 'Custom Autocomplete',
-    //   required: true,
-    //   values: [
-    //     { label: 'SQL' },
-    //     { label: 'C#' },
-    //     { label: 'JavaScript' },
-    //     { label: 'Java' },
-    //     { label: 'Python' },
-    //     { label: 'C++' },
-    //     { label: 'PHP' },
-    //     { label: 'Swift' },
-    //     { label: 'Ruby' }
-    //   ]
-    // },
-    // {
-    //   label: 'Star Rating',
-    //   attrs: {
-    //     type: 'starRating'
-    //   },
-    //   icon: '🌟'
+    //   type: 'split',
+    //   label: '分割',
+    //   subtype: 'h3',
+    //   icon: '↪️'
     // },
 
-
-
     // {
-    //   type: 'flipswitch',
-    //   label: 'Flip Switch',
-    //   //toggle: true
+    //   type: 'remotecomplete',
+    //   label: '自动完成',
+    //   subtype: 'psbi',
+    //   icon: '🔍'
     // },
-    {
-      type: 'split',
-      label: 'Split',
-      subtype: 'h3',
-      icon: '↪️'
-    },
-
-    {
-      type: 'remotecomplete',
-      label: 'Auto Complete',
-      subtype: 'psbi',
-      icon: '🔍'
-    },
-    {
-      type: 'checkbox-group',
-      label: 'Checkbox Group',
-      subtype: 'vertical',
-    },
-    {
-      type: 'radio-group',
-      label: 'Radio Group',
-      subtype: 'vertical',
-    }
+    // {
+    //   type: 'checkbox-group',
+    //   label: '复选框组',
+    //   subtype: 'vertical',
+    // },
+    // {
+    //   type: 'radio-group',
+    //   label: '单选组',
+    //   subtype: 'vertical',
+    // }
   ];
 
   var replaceFields = [
     // {
-    //   type: 'textarea',
-    //   subtype: 'tinymce',
-    //   label: 'tinyMCE',
-    //   required: true,
+    //   type: 'split',
+    //   subtype: 'h3'
+    // },
+    // {
+    //   type: 'remotecomplete',
+    //   subtype: 'psbi',
+    //   icon: '🔍'
+    // },
+    // {
+    //   type: 'checkbox-group',
+    //   subtype: 'vertical'
+    // },
+    // {
+    //   type: 'radio-group',
+    //   subtype: 'vertical'
     // }
-
-    {
-      type: 'textarea',
-      subtype: 'tinymce',
-      label: 'tinyMCE',
-      required: true,
-    }
   ];
+
 
   var actionButtons = [];
 
-  var templates = {
-    starRating: function (fieldData) {
-      return {
-        field: '<span id="' + fieldData.name + '">',
-        onRender: function () {
-          $(document.getElementById(fieldData.name)).rateYo({ rating: 3.6 });
-        }
-      };
-    }
-  };
-
   var typeUserDisabledAttrs = {
     autocomplete: ['access'],
-    file: ['multiple', 'subtype'],
+    file: ['multiple'],
     'checkbox-group': ['toggle', 'inline'],
     'radio-group': ['inline'],
     remotecomplete: ['options'],
@@ -112,7 +76,7 @@ jQuery(function ($) {
       toggleEdit();
       $('.render-wrap').formRender({
         formData: formData,
-        templates: templates
+        templates: {}
       });
       window.sessionStorage.setItem('formData', JSON.stringify(formData));
     },
@@ -121,14 +85,14 @@ jQuery(function ($) {
     },
     sortableControls: true,
     fields: fields,
-    templates: [],//templates,
-    inputSets: [],//inputSets,
+    templates: [], // templates,
+    inputSets: [], // inputSets,
     typeUserDisabledAttrs: typeUserDisabledAttrs,
     typeUserAttrs: typeUserAttrs,
     disableInjectedStyle: false,
     actionButtons: actionButtons,
     disableFields: ['button', 'hidden', 'paragraph', 'split', 'header', 'autocomplete', 'remotecomplete', 'checkbox','checkbox-group','radio-group'], //['autocomplete'], , 'header'
-    replaceFields: [], //replaceFields,
+    replaceFields: replaceFields,
     disabledFieldButtons: {
       split: ['edit'],
       text: ['copy']
@@ -219,7 +183,7 @@ jQuery(function ($) {
           apiBtns[action]();
         });
     });
-
+    //fb.actions.setLang('zh-CN');
     document.getElementById('setLanguage')
       .addEventListener('change', function (e) {
         fb.actions.setLang(e.target.value);

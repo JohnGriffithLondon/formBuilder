@@ -102,9 +102,7 @@ window.fbControls.push(function (controlClass, allControlClasses) {
       key: 'definition',
       get: function get() {
         return {
-          i18n: {
-            flipswitch: 'Flip Switch'
-          }
+          i18n: {}
         };
       }
     }]);

@@ -451,6 +451,7 @@ const FormBuilder = function (opts, element) {
       select: defaultAttrs.concat(['multiple', 'options']),
       textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows']),
       flipswitch: [
+        'required',
         'label',
         'description',
         'className',
@@ -459,7 +460,7 @@ const FormBuilder = function (opts, element) {
         'options',
       ]
     }
-    typeAttrsMap['checkbox-group'] =  [
+    typeAttrsMap['checkbox-group'] = [
       'required',
       'label',
       'description',
@@ -471,9 +472,9 @@ const FormBuilder = function (opts, element) {
       'other',
       'subtype',
       'options',
-     
+
     ]
-    typeAttrsMap['radio-group'] =  [
+    typeAttrsMap['radio-group'] = [
       'required',
       'label',
       'description',
@@ -744,6 +745,9 @@ const FormBuilder = function (opts, element) {
     if (values[name]) {
       cbAttrs.checked = true
     }
+    if (values.type === 'flipswitch') {
+       cbAttrs.disabled = true;
+    }
     let left = []
     let right = [m('input', null, cbAttrs).outerHTML]
 
@@ -942,6 +946,8 @@ const FormBuilder = function (opts, element) {
     if (utils.inArray(type, noRequire)) {
       noMake.push(true)
     }
+  
+   // console.log(fieldData)
     if (!noMake.some(elem => elem === true)) {
       requireField = boolAttribute('required', fieldData, {
         first: i18n.required,
@@ -953,6 +959,9 @@ const FormBuilder = function (opts, element) {
 
   // Append the new field to the editor
   let appendNewField = function (values, isNew = true) {
+    if (values.type === 'flipswitch') {
+      values.required = true;
+    }
     let type = values.type || 'text'
     let label = values.label || i18n[type] || i18n.label
     let disabledFieldButtons = opts.disabledFieldButtons[type] || values.disabledFieldButtons
