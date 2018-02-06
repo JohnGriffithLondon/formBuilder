@@ -41,8 +41,8 @@ export default class controlFineUploader extends controlText {
     return {
       i18n: {
        // default: 'Fine Uploader',
-       file: 'fileUpload',
-       'file-in-tab':'fileUploadInTab',
+      //  file: 'fileUpload',
+      //  'file-in-tab':'fileUploadInTab',
       }
     };
   }

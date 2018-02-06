@@ -104,14 +104,7 @@ window.fbControls.push(function (controlClass, allControlClasses) {
     _createClass(controlRemotecomplete, null, [{
       key: 'definition',
       get: function get() {
-        return {
-          i18n: {
-            psbi: 'psbi',
-            psbm: 'psbm',
-            psbn: 'psbn',
-            bpid: 'bpid'
-          }
-        };
+        return {};
       }
     }]);
 
