@@ -200,7 +200,9 @@ export const defaultI18n = {
       psbn: '用户名',
       bpid: '流程id',
       'datetime-local': '日期与时间',
-      password: '密码'
+      password: '密码',
+      email:'电子邮件',
+      tel:'电话号码'
     },
     'en-US': {
       addOption: 'Add Option +',
@@ -316,7 +318,9 @@ export const defaultI18n = {
       psbn: 'User Name',
       bpid: 'Process Definition',
       'datetime-local': 'datetime',
-      password: 'password'
+      password: 'Password',
+      email:'E-Mail',
+      tel:'Tel'
     }
 
   },

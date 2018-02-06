@@ -94,8 +94,7 @@ jQuery(function ($) {
     disableFields: ['button', 'hidden', 'paragraph', 'split', 'header', 'autocomplete', 'remotecomplete', 'checkbox','checkbox-group','radio-group'], //['autocomplete'], , 'header'
     replaceFields: replaceFields,
     disabledFieldButtons: {
-      split: ['edit'],
-      text: ['copy']
+      split: ['edit']
     },
     //controlPosition: 'left',
     disabledAttrs: disabledAttrs,
