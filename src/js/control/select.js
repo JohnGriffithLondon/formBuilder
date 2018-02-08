@@ -25,6 +25,9 @@ export default class controlSelect extends control {
     if (this.config.type == 'horizontal') {
       this.config.inline = true;
     }
+    if (this.config.type == 'multiple') {
+      this.config.multiple = true;
+    }
     console.log(this);
   }
 
@@ -35,7 +38,7 @@ export default class controlSelect extends control {
   build() {
     let options = [];
     let { values, value, placeholder, type, inline, other, toggle, ...data } = this.config;
-    if (type == 'vertical' || type == 'horizontal') {
+    if (['vertical', 'horizontal', 'single', 'multiple', 'filterable'].indexOf(type) >= 0) {
       type = this.type;
     }
     let optionType = type.replace('-group', '');
@@ -227,3 +230,4 @@ export default class controlSelect extends control {
 control.register(['select', 'checkbox-group', 'radio-group', 'checkbox'], controlSelect);
 control.register(['vertical', 'horizontal'], controlSelect, 'checkbox-group');
 control.register(['vertical', 'horizontal'], controlSelect, 'radio-group');
+control.register(['single', 'multiple', 'filterable'], controlSelect, 'select');

@@ -28,23 +28,33 @@ jQuery(function ($) {
   ];
 
   var replaceFields = [
-    // {
-    //   type: 'split',
-    //   subtype: 'h3'
-    // },
-    // {
-    //   type: 'remotecomplete',
-    //   subtype: 'psbi',
-    //   icon: '🔍'
-    // },
-    // {
-    //   type: 'checkbox-group',
-    //   subtype: 'vertical'
-    // },
-    // {
-    //   type: 'radio-group',
-    //   subtype: 'vertical'
-    // }
+    {
+      type: 'split',
+      subtype: 'h3',
+      label: '分割',
+      icon: '↪️'
+    },
+    {
+      type: 'remotecomplete',
+      subtype: 'psbi',
+      label: '自动完成',
+      icon: '🔍'
+    },
+    {
+      type: 'checkbox-group',
+      subtype: 'vertical',
+      label: '复选框',
+    },
+    {
+      type: 'radio-group',
+      subtype: 'vertical',
+      label: '单选框',
+    },
+    {
+      type: 'select',
+      subtype: 'single',
+      label: '下拉框',
+    }
   ];
 
 
@@ -57,7 +67,8 @@ jQuery(function ($) {
     'radio-group': ['inline'],
     remotecomplete: ['options'],
     number: ['step'],
-    textarea: ['subtype', 'rows']
+    textarea: ['subtype', 'rows'],
+    select:['multiple']
   };
 
   var typeUserAttrs = {
@@ -98,6 +109,7 @@ jQuery(function ($) {
     },
     //controlPosition: 'left',
     disabledAttrs: disabledAttrs,
+    locale: 'zh-CN',
     controlOrder: [
       'text',
       'textarea',
@@ -136,6 +148,7 @@ jQuery(function ($) {
   }
 
   var setFormData = '[{"type":"text","label":"Full Name","subtype":"text","className":"form-control","name":"text-1476748004559"},{"type":"select","label":"Occupation","className":"form-control","name":"select-1476748006618","values":[{"label":"Street Sweeper","value":"option-1","selected":true},{"label":"Moth Man","value":"option-2"},{"label":"Chemist","value":"option-3"}]},{"type":"textarea","label":"Short Bio","rows":"5","className":"form-control","name":"textarea-1476748007461"}]';
+
 
   var formBuilder = $('.build-wrap').formBuilder(fbOptions);
   var fbPromise = formBuilder.promise;

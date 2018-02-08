@@ -2,9 +2,9 @@ import pkg from '../package.json';
 import {resolve} from 'path';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-// import CompressionPlugin from 'compression-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
 import {BannerPlugin} from 'webpack';
-// import BabiliPlugin from 'babili-webpack-plugin';
+import BabiliPlugin from 'babili-webpack-plugin';
 
 // hack for Ubuntu on Windows
 try {
@@ -14,7 +14,9 @@ try {
 }
 
 const PRODUCTION = process.argv.includes('-p');
-const devtool = PRODUCTION ? false : 'cheap-module-eval-source-map';
+// const devtool = PRODUCTION ? false : 'cheap-module-eval-source-map';
+console.log(PRODUCTION);
+const devtool = PRODUCTION ? false :'source-map';
 const outputDir = resolve(__dirname, '../', 'demo/assets/js/');
 
 const bannerTemplate = [
@@ -36,7 +38,7 @@ const webpackConfig = {
   output: {
     path: outputDir,
     publicPath: '/assets/js/',
-    filename: '[name].js'
+    filename: '[name].min.js'
   },
   module: {
     rules: [
@@ -98,7 +100,6 @@ const webpackConfig = {
     new ExtractTextPlugin({
       filename: '[name].[contenthash].css'
     }),
- 
     new BannerPlugin(bannerTemplate)
   ],
   devtool,
@@ -112,7 +113,7 @@ const webpackConfig = {
   devServer: {
     inline: false,
     contentBase: 'demo/',
-    noInfo: false
+    noInfo: true
   }
 };
 

@@ -11,6 +11,7 @@ const outputDir = resolve(__dirname, '../', 'demo/assets/js/control_plugins/');
 webpackConfig.entry = {};
 
 webpackConfig.plugins = [
+  new BabiliPlugin(),
   new CopyWebpackPlugin([
     {
       from: outputDir,
@@ -22,7 +23,7 @@ webpackConfig.plugins = [
 webpackConfig.output = {
   path: outputDir,
   publicPath: '/assets/js/control_plugins',
-  filename: '[name].js'
+  filename: '[name].min.js'
 };
 
 webpackConfig.devtool = false;

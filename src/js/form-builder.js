@@ -18,6 +18,7 @@ let instanceTime = new Date().getTime()
 const FormBuilder = function (opts, element) {
   const formBuilder = this
   const i18n = mi18n.current
+  // const i18n = 'zh-CN'
   const formID = 'frmb-' + instanceTime++
   const data = new Data(formID)
   const d = new Dom(formID)
@@ -448,7 +449,7 @@ const FormBuilder = function (opts, element) {
       hidden: ['name', 'value', 'access'],
       paragraph: ['label', 'subtype', 'className', 'access'],
       number: defaultAttrs.concat(['min', 'max', 'step', 'subtype']),
-      select: defaultAttrs.concat(['multiple', 'options']),
+      select: defaultAttrs.concat(['subtype', 'multiple', 'options']),
       textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows']),
       flipswitch: [
         'required',
@@ -745,9 +746,9 @@ const FormBuilder = function (opts, element) {
     if (values[name]) {
       cbAttrs.checked = true
     }
-    if (values.type === 'flipswitch') {
-       cbAttrs.disabled = true;
-    }
+    // if (values.type === 'flipswitch') {
+    //    cbAttrs.disabled = true;
+    // }
     let left = []
     let right = [m('input', null, cbAttrs).outerHTML]
 
@@ -946,8 +947,8 @@ const FormBuilder = function (opts, element) {
     if (utils.inArray(type, noRequire)) {
       noMake.push(true)
     }
-  
-   // console.log(fieldData)
+
+    // console.log(fieldData)
     if (!noMake.some(elem => elem === true)) {
       requireField = boolAttribute('required', fieldData, {
         first: i18n.required,
@@ -959,9 +960,9 @@ const FormBuilder = function (opts, element) {
 
   // Append the new field to the editor
   let appendNewField = function (values, isNew = true) {
-    if (values.type === 'flipswitch') {
-      values.required = true;
-    }
+    // if (values.type === 'flipswitch') {
+    //   values.required = true;
+    // }
     let type = values.type || 'text'
     let label = values.label || i18n[type] || i18n.label
     let disabledFieldButtons = opts.disabledFieldButtons[type] || values.disabledFieldButtons
