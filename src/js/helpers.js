@@ -142,7 +142,7 @@ export default class Helpers {
     let formData = this.prepData(form)
     let xml = ['<form-template>\n\t<fields>']
 
-    utils.forEach(formData, function (fieldIndex, field) {
+    utils.forEach(formData, function(fieldIndex, field) {
       let fieldContent = null
       const optionFields = optionFieldsRegEx
 
@@ -183,7 +183,7 @@ export default class Helpers {
 
     if (form.childNodes.length !== 0) {
       // build data object
-      utils.forEach(form.childNodes, function (index, field) {
+      utils.forEach(form.childNodes, function(index, field) {
         let $field = $(field)
 
         if (!$field.hasClass('disabled-field')) {
@@ -315,7 +315,7 @@ export default class Helpers {
       let name = utils.camelCase(attr.getAttribute('name'))
       if (attr.attributes['contenteditable']) {
         value = attr.innerHTML
-      } else if (attr.type === 'checkbox' || attr.type === 'flipswitch') {
+      } else if (attr.type === 'checkbox'|| attr.type === 'flipswitch') {
         value = attr.checked
       } else {
         value = attr.value
@@ -355,7 +355,7 @@ export default class Helpers {
       previewData.values = []
       previewData.multiple = $('[name="multiple"]', field).is(':checked')
 
-      $('.sortable-options li', field).each(function (i, $option) {
+      $('.sortable-options li', field).each(function(i, $option) {
         let option = {}
         option.selected = $('.option-selected', $option).is(':checked')
         option.value = $('.option-value', $option).val()
@@ -502,7 +502,7 @@ export default class Helpers {
     document.body.appendChild(overlay)
     overlay.classList.add('visible')
 
-    overlay.onclick = function () {
+    overlay.onclick = function() {
       _this.closeConfirm(overlay)
     }
 
@@ -529,11 +529,11 @@ export default class Helpers {
       className: 'no btn btn-danger btn-sm',
     })
 
-    no.onclick = function () {
+    no.onclick = function() {
       _this.closeConfirm(overlay)
     }
 
-    yes.onclick = function () {
+    yes.onclick = function() {
       yesAction()
       _this.closeConfirm(overlay)
     }
@@ -623,7 +623,7 @@ export default class Helpers {
     if (fields.length) {
       _this.confirm(
         i18n.clearAllMessage,
-        function () {
+        function() {
           _this.removeAllFields.call(_this, stage)
           config.opts.notify.success(i18n.allFieldsRemoved)
           config.opts.onClearAll()
@@ -801,12 +801,11 @@ export default class Helpers {
     let d = this.d
     const $cbWrap = $(d.controls).parent()
     const $stageWrap = $(d.stage).parent()
-    let cbWidth = $cbWrap.width()
-    let cbPosition = d.controls.getBoundingClientRect()
-    $(window).scroll(function (evt) {
+    const cbWidth = $cbWrap.width()
+    const cbPosition = d.controls.getBoundingClientRect()
+
+    $(window).scroll(function(evt) {
       let scrollTop = $(evt.target).scrollTop()
-      cbWidth = $cbWrap.width()
-      cbPosition = d.controls.getBoundingClientRect()
       const offsetDefaults = {
         top: 5,
         bottom: 'auto',
@@ -819,7 +818,7 @@ export default class Helpers {
       if (scrollTop > $stageWrap.offset().top) {
         const style = {
           position: 'fixed',
-          width: cbWidth
+          width: cbWidth,
         }
 
         const cbStyle = Object.assign(style, offset)
@@ -829,7 +828,7 @@ export default class Helpers {
         let cbBottom = cbOffset.top + $cbWrap.height()
         let stageBottom = stageOffset.top + $stageWrap.height()
         let atBottom = cbBottom === stageBottom && cbOffset.top > scrollTop
-        cbBottom = Number(cbBottom.toFixed(2))
+
         if (cbBottom > stageBottom && cbOffset.top !== stageOffset.top) {
           $cbWrap.css({
             position: 'absolute',
@@ -896,7 +895,7 @@ export default class Helpers {
       return false
     }
 
-    $field.slideUp(animationSpeed, function () {
+    $field.slideUp(animationSpeed, function() {
       $field.removeClass('deleting')
       $field.remove()
       fieldRemoved = true
