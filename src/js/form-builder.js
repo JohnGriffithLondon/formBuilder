@@ -444,7 +444,7 @@ const FormBuilder = function (opts, element) {
       text: defaultAttrs.concat(['subtype', 'maxlength']),
       date: defaultAttrs.concat(['subtype']),
       file: defaultAttrs.concat(['subtype', 'multiple']),
-      header: ['label', 'subtype', 'className', 'access'],
+      header: ['label', 'name', 'subtype', 'className', 'access'],
       split: ['label', 'subtype', 'className', 'access'],
       hidden: ['name', 'value', 'access'],
       paragraph: ['label', 'subtype', 'className', 'access'],
@@ -621,6 +621,7 @@ const FormBuilder = function (opts, element) {
         useDefaultAttr.push(false)
       }
 
+      // let toHide = attr === 'subtype' && type === 'header'
       if (useDefaultAttr.every(use => use === true)) {
         advFields.push(advFieldMap[attr]())
       }
@@ -864,12 +865,14 @@ const FormBuilder = function (opts, element) {
       name: attribute,
       className: `fld-${attribute} form-control`,
     }
+    let visibility = (attribute === 'subtype' && values.type === 'header') ? 'none' : 'block'
     let labelText = i18n[attribute] || utils.capitalize(attribute)
     let label = m('label', labelText, { for: selectAttrs.id })
     let select = m('select', selectOptions, selectAttrs)
     let inputWrap = m('div', select, { className: 'input-wrap' })
     let attrWrap = m('div', [label, inputWrap], {
       className: `form-group ${selectAttrs.name}-wrap`,
+      style: `display: ${visibility}`,
     })
 
     return attrWrap.outerHTML
@@ -928,7 +931,6 @@ const FormBuilder = function (opts, element) {
       else if (attribute === 'className') {
         visibility = 'none'
       }
-
       attributefield = m('div', [attributeLabel, inputWrap], {
         className: `form-group ${attribute}-wrap`,
         style: `display: ${visibility}`,
@@ -948,7 +950,6 @@ const FormBuilder = function (opts, element) {
       noMake.push(true)
     }
 
-    // console.log(fieldData)
     if (!noMake.some(elem => elem === true)) {
       requireField = boolAttribute('required', fieldData, {
         first: i18n.required,

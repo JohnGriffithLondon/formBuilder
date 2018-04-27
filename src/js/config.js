@@ -123,7 +123,7 @@ export const defaultI18n = {
       formUpdated: '表单已更新',
       getStarted: '请从右边拖拽控件。',
       header: '表头',
-      split: '分割',
+      split: '分块',
       hide: '隐藏域',
       hidden: '隐藏',
       inline: 'Inline',

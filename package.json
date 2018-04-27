@@ -112,7 +112,7 @@
     "build:plugins": "babel-node -- node_modules/webpack/bin/webpack --display-entrypoints --progress --config tools/webpack.plugins.config"
   },
   "dependencies": {
-    "jquery": "^3.1.1",
+    "jquery": "2.1",
     "jquery-ui-sortable": "*"
   },
   "devDependencies": {

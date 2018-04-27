@@ -29,9 +29,14 @@ jQuery(function ($) {
 
   var replaceFields = [
     {
+      type: 'header',
+      subtype: 'h3',
+      label: '表头'
+    },
+    {
       type: 'split',
       subtype: 'h3',
-      label: '分割',
+      label: '分块',
       icon: '↪️'
     },
     {
