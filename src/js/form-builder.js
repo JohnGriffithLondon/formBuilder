@@ -1403,8 +1403,8 @@ const FormBuilder = function (opts, element) {
   )
 
   loadFields()
-
-  $stage.css('min-height', $cbUL.height())
+  let minHeight=  $cbUL.height() || 469; 
+  $stage.css('min-height', minHeight)
 
   // If option set, controls will remain in view in editor
   if (opts.stickyControls.enable) {
