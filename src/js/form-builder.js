@@ -650,6 +650,9 @@ const FormBuilder = function (opts, element) {
         let orig = i18n[attribute]
         let tUA = typeUserAttr[attribute]
         let origValue = tUA.value
+        if (attribute === 'variable' && !tUA.value) {
+          tUA.value = values.type || ''
+        }
         tUA.value = values[attribute] || tUA.value || ''
 
         if (tUA.label) {
@@ -1403,7 +1406,7 @@ const FormBuilder = function (opts, element) {
   )
 
   loadFields()
-  let minHeight=  $cbUL.height() || 469; 
+  let minHeight = $cbUL.height() || 469;
   $stage.css('min-height', minHeight)
 
   // If option set, controls will remain in view in editor
