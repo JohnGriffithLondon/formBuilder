@@ -107,7 +107,7 @@
     "release:patch": "npm run tag:patch --patch && npm run deploy",
     "release:minor": "npm run tag:minor --minor && npm run deploy",
     "start": "babel-node -- node_modules/webpack-dev-server/bin/webpack-dev-server --config tools/webpack.config",
-    "build": "babel-node -- node_modules/webpack/bin/webpack --progress --config tools/webpack.config && cp demo/assets/js/form-* dist/",
+    "build": "babel-node -- node_modules/webpack/bin/webpack --config tools/webpack.config && cp demo/assets/js/form-* dist/",
     "build:vendor": "babel-node -- tools/run build-vendor",
     "build:plugins": "babel-node -- node_modules/webpack/bin/webpack --display-entrypoints --progress --config tools/webpack.plugins.config"
   },
@@ -201,6 +201,7 @@
       "node": true
     },
     "rules": {
+		"linebreak-style": 0,
       "quote-props": 0,
       "no-unused-vars": 1,
       "no-console": 0,

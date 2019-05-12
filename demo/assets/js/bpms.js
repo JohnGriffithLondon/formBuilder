@@ -97,7 +97,7 @@ jQuery(function ($) {
       window.sessionStorage.setItem('formData', JSON.stringify(formData));
     },
     stickyControls: {
-      enable: true
+      enable: false
     },
     sortableControls: true,
     fields: fields,
@@ -112,7 +112,8 @@ jQuery(function ($) {
     disabledFieldButtons: {
       split: ['edit']
     },
-    //controlPosition: 'left',
+    
+    controlPosition: 'left',
     disabledAttrs: disabledAttrs,
     locale: 'zh-CN',
     controlOrder: [

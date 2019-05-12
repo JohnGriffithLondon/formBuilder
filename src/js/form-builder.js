@@ -426,8 +426,8 @@ const FormBuilder = function (opts, element) {
     let valueField = !utils.inArray(type, noValFields)
 
     const typeAttrsMap = {
-      remotecomplete: defaultAttrs.concat(['subtype']),
-      autocomplete: defaultAttrs.concat(['options']),
+      remotecomplete: defaultAttrs.concat(['subtype', 'dataset','listen','source','target']),
+      autocomplete: defaultAttrs.concat(['options', 'dataset','listen','source','target']),
       button: ['label', 'subtype', 'style', 'className', 'name', 'value', 'access'],
       checkbox: [
         'required',
@@ -440,17 +440,18 @@ const FormBuilder = function (opts, element) {
         'access',
         'other',
         'options',
+        'dataset','listen','source','target'
       ],
-      text: defaultAttrs.concat(['subtype', 'maxlength']),
-      date: defaultAttrs.concat(['subtype']),
+      text: defaultAttrs.concat(['subtype', 'maxlength', 'dataset','listen','source','target']),
+      date: defaultAttrs.concat(['subtype', 'dataset','listen','source','target']),
       file: defaultAttrs.concat(['subtype', 'multiple']),
       header: ['label', 'name', 'subtype', 'className', 'access'],
       split: ['label', 'subtype', 'className', 'access'],
       hidden: ['name', 'value', 'access'],
       paragraph: ['label', 'subtype', 'className', 'access'],
-      number: defaultAttrs.concat(['min', 'max', 'step', 'subtype']),
-      select: defaultAttrs.concat(['subtype', 'multiple', 'options']),
-      textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows']),
+      number: defaultAttrs.concat(['min', 'max', 'step', 'subtype', 'dataset','listen','source','target']),
+      select: defaultAttrs.concat(['subtype', 'multiple', 'options', 'dataset','listen','source','target']),
+      textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows', 'dataset','listen','source','target']),
       flipswitch: [
         'required',
         'label',
@@ -459,6 +460,7 @@ const FormBuilder = function (opts, element) {
         'name',
         'other',
         'options',
+        'dataset','listen','source','target'
       ]
     }
     typeAttrsMap['checkbox-group'] = [
@@ -473,7 +475,7 @@ const FormBuilder = function (opts, element) {
       'other',
       'subtype',
       'options',
-
+      'dataset','listen','source','target'
     ]
     typeAttrsMap['radio-group'] = [
       'required',
@@ -486,7 +488,8 @@ const FormBuilder = function (opts, element) {
       'access',
       'other',
       'subtype',
-      'options'
+      'options',
+      'dataset','listen','source','target'
     ]
     let typeAttrs = typeAttrsMap[type]
 
@@ -517,6 +520,10 @@ const FormBuilder = function (opts, element) {
     let fieldAttrs = defaultFieldAttrs(type)
     const advFieldMap = {
       required: () => requiredField(values),
+      dataset: () => datasetField(values),
+      listen: () => listenField(values),
+      source: () => sourceField(values),
+      target: () => targetField(values),
       toggle: () => boolAttribute('toggle', values, { first: i18n.toggle }),
       inline: () => {
         let labels = {
@@ -866,7 +873,7 @@ const FormBuilder = function (opts, element) {
     let selectAttrs = {
       id: attribute + '-' + data.lastID,
       name: attribute,
-      className: `fld-${attribute} form-control`,
+      className: `fld-${attribute} form-control`
     }
     let visibility = (attribute === 'subtype' && values.type === 'header') ? 'none' : 'block'
     let labelText = i18n[attribute] || utils.capitalize(attribute)
@@ -961,6 +968,83 @@ const FormBuilder = function (opts, element) {
 
     return requireField
   }
+
+  const datasetField = fieldData => {
+    let { type } = fieldData
+    let noRequire = ['header', 'paragraph', 'button', 'split']
+    let noMake = []
+    let field = ''
+    let options = JSON.parse(JSON.stringify(opts.dataset))
+    options.unshift({ label: '', value: '' })
+    if (utils.inArray(type, noRequire)) {
+      noMake.push(true)
+    }
+
+    if (!noMake.some(elem => elem === true)) {
+      field = selectAttribute('dataset', fieldData, options)
+    }
+
+    return field
+  }
+
+  
+  const listenField = fieldData => {
+    let { type } = fieldData
+    let noRequire = ['header', 'paragraph', 'button', 'split']
+    let noMake = []
+    let field = ''
+
+    if (utils.inArray(type, noRequire)) {
+      noMake.push(true)
+    }
+
+    if (!noMake.some(elem => elem === true)) {
+      field = selectAttribute('listen', fieldData, [])
+    }
+
+    return field
+  }
+
+  
+  const sourceField = fieldData => {
+    let { type } = fieldData
+    let noRequire = ['header', 'paragraph', 'button', 'split']
+    let noMake = []
+    let field = ''
+    if (utils.inArray(type, noRequire)) {
+      noMake.push(true)
+    }
+
+    if (!noMake.some(elem => elem === true)) {
+      field = selectAttribute('source', fieldData, [])
+    }
+
+    return field
+  }
+
+  
+  const targetField = fieldData => {
+    let { type } = fieldData
+    let noRequire = ['header', 'paragraph', 'button', 'split']
+    let noMake = []
+    let field = ''
+    let options = JSON.parse(JSON.stringify(opts.dataset))
+    options.unshift({ label: '', value: '' })
+    if (utils.inArray(type, noRequire)) {
+      noMake.push(true)
+    }
+
+    if (!noMake.some(elem => elem === true)) {
+      field = selectAttribute('target', fieldData, [])
+    }
+
+    return field
+  }
+
+  
+
+
+  
 
   // Append the new field to the editor
   let appendNewField = function (values, isNew = true) {
@@ -1486,6 +1570,7 @@ const FormBuilder = function (opts, element) {
             .catch(console.error)
         }),
       }
+
 
       return instance
     }
