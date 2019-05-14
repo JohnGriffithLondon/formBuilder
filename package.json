@@ -107,7 +107,7 @@
     "release:patch": "npm run tag:patch --patch && npm run deploy",
     "release:minor": "npm run tag:minor --minor && npm run deploy",
     "start": "babel-node -- node_modules/webpack-dev-server/bin/webpack-dev-server --config tools/webpack.config",
-    "build": "babel-node -- node_modules/webpack/bin/webpack --config tools/webpack.config && cp demo/assets/js/form-* dist/",
+    "build": "babel-node -- node_modules/webpack/bin/webpack --config tools/webpack.config && cp demo/assets/js/form-* dist/ && cp 'C:/Users/i333147/git/formBuilder/dist/form-builder.min.js' 'C:/Users/i333147/git/bpms-admin/libs/form-builder' && cp 'C:/Users/i333147/git/formBuilder/dist/form-render.min.js' 'C:/Users/i333147/git/bpms-admin/libs/form-builder'",
     "build:vendor": "babel-node -- tools/run build-vendor",
     "build:plugins": "babel-node -- node_modules/webpack/bin/webpack --display-entrypoints --progress --config tools/webpack.plugins.config"
   },

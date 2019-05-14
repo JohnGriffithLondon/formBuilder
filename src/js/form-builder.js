@@ -867,6 +867,7 @@ const FormBuilder = function (opts, element) {
       if (option.value === values[attribute]) {
         optionAttrs.selected = true
       }
+     
       optionAttrs = utils.trimObj(optionAttrs)
       return m('option', optionAttrs.label, optionAttrs)
     })
@@ -1288,6 +1289,14 @@ const FormBuilder = function (opts, element) {
 
   $stage.on('change', '[name="subtype"]', e => {
     const $field = $(e.target).closest('li.form-field')
+    const $valWrap = $('.value-wrap', $field)
+    $valWrap.toggle(e.target.value !== 'quill')
+  })
+
+
+  $stage.on('change', '[name="dataset"]', e => {
+    const $field = $(e.target).closest('li.form-field')
+    const $holder =   $(e.target).closest('div.frm-holder') 
     const $valWrap = $('.value-wrap', $field)
     $valWrap.toggle(e.target.value !== 'quill')
   })
