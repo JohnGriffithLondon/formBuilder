@@ -426,8 +426,8 @@ const FormBuilder = function (opts, element) {
     let valueField = !utils.inArray(type, noValFields)
 
     const typeAttrsMap = {
-      remotecomplete: defaultAttrs.concat(['subtype', 'dataset','listen','source','target']),
-      autocomplete: defaultAttrs.concat(['options', 'dataset','listen','source','target']),
+      remotecomplete: defaultAttrs.concat(['subtype', 'dataset', 'listen', 'source', 'target']),
+      autocomplete: defaultAttrs.concat(['options', 'dataset', 'listen', 'source', 'target']),
       button: ['label', 'subtype', 'style', 'className', 'name', 'value', 'access'],
       checkbox: [
         'required',
@@ -440,18 +440,18 @@ const FormBuilder = function (opts, element) {
         'access',
         'other',
         'options',
-        'dataset','listen','source','target'
+        'dataset', 'listen', 'source', 'target'
       ],
-      text: defaultAttrs.concat(['subtype', 'maxlength', 'dataset','listen','source','target']),
-      date: defaultAttrs.concat(['subtype', 'dataset','listen','source','target']),
+      text: defaultAttrs.concat(['subtype', 'maxlength', 'dataset', 'listen', 'source', 'target']),
+      date: defaultAttrs.concat(['subtype', 'dataset', 'listen', 'source', 'target']),
       file: defaultAttrs.concat(['subtype', 'multiple']),
       header: ['label', 'name', 'subtype', 'className', 'access'],
       split: ['label', 'subtype', 'className', 'access'],
       hidden: ['name', 'value', 'access'],
       paragraph: ['label', 'subtype', 'className', 'access'],
-      number: defaultAttrs.concat(['min', 'max', 'step', 'subtype', 'dataset','listen','source','target']),
-      select: defaultAttrs.concat(['subtype', 'multiple', 'options', 'dataset','listen','source','target']),
-      textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows', 'dataset','listen','source','target']),
+      number: defaultAttrs.concat(['min', 'max', 'step', 'subtype', 'dataset', 'listen', 'source', 'target']),
+      select: defaultAttrs.concat(['subtype', 'multiple', 'options', 'dataset', 'listen', 'source', 'target']),
+      textarea: defaultAttrs.concat(['subtype', 'maxlength', 'rows', 'dataset', 'listen', 'source', 'target']),
       flipswitch: [
         'required',
         'label',
@@ -460,7 +460,7 @@ const FormBuilder = function (opts, element) {
         'name',
         'other',
         'options',
-        'dataset','listen','source','target'
+        'dataset', 'listen', 'source', 'target'
       ]
     }
     typeAttrsMap['checkbox-group'] = [
@@ -475,7 +475,7 @@ const FormBuilder = function (opts, element) {
       'other',
       'subtype',
       'options',
-      'dataset','listen','source','target'
+      'dataset', 'listen', 'source', 'target'
     ]
     typeAttrsMap['radio-group'] = [
       'required',
@@ -489,7 +489,7 @@ const FormBuilder = function (opts, element) {
       'other',
       'subtype',
       'options',
-      'dataset','listen','source','target'
+      'dataset', 'listen', 'source', 'target'
     ]
     let typeAttrs = typeAttrsMap[type]
 
@@ -867,7 +867,7 @@ const FormBuilder = function (opts, element) {
       if (option.value === values[attribute]) {
         optionAttrs.selected = true
       }
-     
+
       optionAttrs = utils.trimObj(optionAttrs)
       return m('option', optionAttrs.label, optionAttrs)
     })
@@ -975,7 +975,9 @@ const FormBuilder = function (opts, element) {
     let noRequire = ['header', 'paragraph', 'button', 'split']
     let noMake = []
     let field = ''
-    let options = JSON.parse(JSON.stringify(opts.dataset))
+    let options = opts.dataset.map(function (data) {
+      return { label: data.name, value: data.collection }
+    })
     options.unshift({ label: '', value: '' })
     if (utils.inArray(type, noRequire)) {
       noMake.push(true)
@@ -988,7 +990,7 @@ const FormBuilder = function (opts, element) {
     return field
   }
 
-  
+
   const listenField = fieldData => {
     let { type } = fieldData
     let noRequire = ['header', 'paragraph', 'button', 'split']
@@ -1006,7 +1008,7 @@ const FormBuilder = function (opts, element) {
     return field
   }
 
-  
+
   const sourceField = fieldData => {
     let { type } = fieldData
     let noRequire = ['header', 'paragraph', 'button', 'split']
@@ -1023,14 +1025,13 @@ const FormBuilder = function (opts, element) {
     return field
   }
 
-  
+
   const targetField = fieldData => {
     let { type } = fieldData
     let noRequire = ['header', 'paragraph', 'button', 'split']
     let noMake = []
     let field = ''
-    let options = JSON.parse(JSON.stringify(opts.dataset))
-    options.unshift({ label: '', value: '' })
+
     if (utils.inArray(type, noRequire)) {
       noMake.push(true)
     }
@@ -1042,10 +1043,10 @@ const FormBuilder = function (opts, element) {
     return field
   }
 
-  
 
 
-  
+
+
 
   // Append the new field to the editor
   let appendNewField = function (values, isNew = true) {
@@ -1295,10 +1296,32 @@ const FormBuilder = function (opts, element) {
 
 
   $stage.on('change', '[name="dataset"]', e => {
-    const $field = $(e.target).closest('li.form-field')
-    const $holder =   $(e.target).closest('div.frm-holder') 
-    const $valWrap = $('.value-wrap', $field)
-    $valWrap.toggle(e.target.value !== 'quill')
+    // const $field = $(e.target).closest('li.form-field')
+    const $holder = $(e.target).closest('div.frm-holder')
+    const val = $(e.target).val()
+    $holder.find('[name="listen"]').val('').empty()
+    $holder.find('[name="source"]').val('').empty()
+    $holder.find('[name="target"]').val('').empty()
+
+    let buildOptions = function (e, o) {
+      o.forEach(function (item) {
+        e.append('<option value="' + item.id + '">' + item.name + '</option>')
+      })
+    }
+    if (val) {
+
+
+      const sourceList = opts.dataset.filter(function (item) {
+        return item.collection === val;
+      })[0].fields;
+      sourceList.unshift({ id: '', name: '' })
+      buildOptions($holder.find('[name="source"]'), sourceList)
+      buildOptions($holder.find('[name="target"]'), sourceList)
+
+    }
+
+    // const $valWrap = $('.value-wrap', $field)
+    // $valWrap.toggle(e.target.value !== 'quill')
   })
 
   let stageOnChangeSelectors = ['.prev-holder input', '.prev-holder select', '.prev-holder textarea']
