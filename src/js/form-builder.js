@@ -1000,7 +1000,8 @@ const FormBuilder = function (opts, element) {
     if (utils.inArray(type, noRequire)) {
       noMake.push(true)
     }
-
+    
+   
     if (!noMake.some(elem => elem === true)) {
       field = selectAttribute('listen', fieldData, [])
     }
@@ -1317,6 +1318,14 @@ const FormBuilder = function (opts, element) {
       sourceList.unshift({ id: '', name: '' })
       buildOptions($holder.find('[name="source"]'), sourceList)
       buildOptions($holder.find('[name="target"]'), sourceList)
+
+
+      let options = $(e.target).closest('div.build-wrap').data('formBuilder').actions.getData().map(function (data) {
+        return { name: data.label, id: data.name }
+      })
+      options.unshift({ name: '', id: '' })
+
+      buildOptions($holder.find('[name="listen"]'), options)
 
     }
 
